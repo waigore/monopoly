@@ -22,4 +22,27 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_URL: ${{ github.event.pull_request.html_url }}
-        run: gh pr merge --auto --squash "$PR_URL"
+        run: |
+          # GitHub computes mergeability in the background. Asking too soon
+          # returns UNKNOWN/UNSTABLE and enablePullRequestAutoMerge fails.
+          for i in $(seq 1 24); do
+            mergeable=$(gh pr view "$PR_URL" --json mergeable --jq .mergeable)
+            status=$(gh pr view "$PR_URL" --json mergeStateStatus --jq .mergeStateStatus)
+            echo "attempt=$i mergeable=$mergeable mergeStateStatus=$status"
+            case "$mergeable" in
+              CONFLICTING)
+                echo "PR has merge conflicts"
+                exit 1
+                ;;
+              UNKNOWN)
+                sleep 5
+                continue
+                ;;
+            esac
+            if gh pr merge --auto --squash "$PR_URL"; then
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "Timed out waiting for the PR to become mergeable"
+          exit 1

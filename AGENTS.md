@@ -6,23 +6,7 @@ Instructions for coding agents working in this repository. Human contributors sh
 
 `monopoly` is a simple cross-platform clone of the property-trading board game. It is licensed under the Apache License 2.0 (`LICENSE`).
 
-The tree currently holds the license and these docs. There is no application code, package manifest, or task runner yet. Record real commands here when they appear. Leave this file accurate.
-
-## Defaults
-
-- Make the smallest change that completes the request.
-- Read the files you will change and match the style already in the tree.
-- Ask before choosing a language, framework, engine, or directory layout. None is selected yet.
-- Ask before adding a dependency, package manager, lockfile, or CI workflow.
-- Ask before deleting files, rewriting history, force-pushing, or editing `LICENSE`.
-- State what you ran and what the result was. If a check does not exist, say so.
-- Keep rules logic deterministic and independent of any user interface, so the same game can run on more than one platform.
-
-## Commands
-
-No install, lint, test, or run command exists yet.
-
-When a manifest or workflow lands, copy the exact commands into this section, including flags. Until then, do not install packages or generate a project skeleton unless the user asked for that setup.
+The tree currently holds the license, contributor docs, and `specs/`. Leave this file accurate.
 
 ## Layout
 
@@ -31,9 +15,25 @@ LICENSE                 Apache License 2.0
 AGENTS.md               Instructions for coding agents
 CONTRIBUTING.md         Instructions for human contributors
 docs/workflow/          Processes for landing changes
+specs/                  Design and contract Markdown
+  game/                 Game design
+  ui/                   UI and UX
+  tech/                 Tech stack and non-functional requirements
+  module/               Modules, contracts, and integration
+  test/                 Testing tools and instructions
 ```
 
-Put new source in a directory the project already uses. If none exists, ask where it should live before creating a tree of folders.
+Put new source in a directory the project already uses. If none exists, ask where it should live before creating a tree of folders. Put new specs under `specs/` in the folder that matches the subject.
+
+## Specs
+
+Read [specs/README.md](specs/README.md) for the index. Write specs as Markdown. Follow these conventions:
+
+- Keep each file under 500 lines. Split into linked sub-documents when a file would grow past that.
+- Link other specs instead of copying the same content.
+- Start each file with YAML frontmatter: `title`, `tags` (for search), and `last_edited` (ISO date `YYYY-MM-DD`). Update `last_edited` when you change the file.
+- Put a **Quick start** section immediately after the heading so a reader can act without scanning the whole document.
+- Do not include a changelog. Git history is the record of edits.
 
 ## Game
 
