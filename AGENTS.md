@@ -6,7 +6,7 @@ Instructions for coding agents working in this repository. Human contributors sh
 
 `monopoly` is a simple cross-platform clone of the property-trading board game. It is licensed under the Apache License 2.0 (`LICENSE`).
 
-The tree currently holds the license and these docs. There is no application code, package manifest, task runner, or CI yet. Record real commands here when they appear. Leave this file accurate.
+The tree currently holds the license and these docs. There is no application code, package manifest, or task runner yet. Record real commands here when they appear. Leave this file accurate.
 
 ## Defaults
 
@@ -27,9 +27,10 @@ When a manifest or workflow lands, copy the exact commands into this section, in
 ## Layout
 
 ```text
-LICENSE          Apache License 2.0
-AGENTS.md        Instructions for coding agents
-CONTRIBUTING.md  Instructions for human contributors
+LICENSE                 Apache License 2.0
+AGENTS.md               Instructions for coding agents
+CONTRIBUTING.md         Instructions for human contributors
+docs/workflow/          Processes for landing changes
 ```
 
 Put new source in a directory the project already uses. If none exists, ask where it should live before creating a tree of folders.
@@ -60,12 +61,13 @@ Follow the formatter and linter checked into the repo once they exist. Until the
 
 ## Git
 
+Read `docs/workflow/` for the process that gets changes onto `main`.
+
 - The default branch is `main`. Branch from it as `type/short-topic`, for example `feat/board-model`.
 - Use [Conventional Commits](https://www.conventionalcommits.org/): `feat:`, `fix:`, `docs:`, `test:`, `refactor:`, `chore:`.
 - Write an imperative subject with no trailing period, ideally under 72 characters.
 - Keep each commit to one logical change.
 - Leave secrets, credentials, large generated binaries, and local editor state uncommitted.
-- Push only when the user asks.
 
 ## Finish
 
