@@ -1,6 +1,6 @@
 # Always-passing check. Main requires it so a pull request can enable
 # auto-merge while this job is still pending.
-name: noop
+name: trigger-automerge
 
 on:
   pull_request:
@@ -8,8 +8,8 @@ on:
 permissions: {}
 
 jobs:
-  noop:
-    name: noop
+  trigger-automerge:
+    name: trigger-automerge
     runs-on: ubuntu-latest
     steps:
       - name: Pass
