@@ -1,5 +1,7 @@
-# Always-passing required check. Main requires it so a pull request can
-# merge once this job succeeds.
+# Always-passing required check. Main requires it; enable-automerge
+# squash-merges once this job succeeds. Keep this job last: any other
+# gate that must pass before merge should use needs: so it finishes
+# before this job runs. See docs/workflow/main.md.
 name: trigger-automerge
 
 on:

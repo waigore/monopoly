@@ -8,7 +8,7 @@ last_edited: 2026-10-07
 
 ## Quick start
 
-Write design and contract notes as Markdown under this tree. Follow the spec conventions in [AGENTS.md](../AGENTS.md). Put each document in the folder that matches its subject.
+Write design and contract notes as Markdown under this tree. Follow the Markdown conventions in [AGENTS.md](../AGENTS.md). Put each document in the folder that matches its subject.
 
 | Folder | Use for |
 | --- | --- |
