@@ -10,4 +10,4 @@ last_edited: 2026-10-07
 
 Document screens, layout, component hierarchy, interactions, and visual states (default, loading, error, empty).
 
-Do not restate game rules here. Link [game](../game/) specs for rules and [module](../module/) specs for API and data contracts. Follow spec conventions in [AGENTS.md](../../AGENTS.md).
+Do not restate game rules here. Link [game](../game/) specs for rules and [module](../module/) specs for API and data contracts. Follow the Markdown conventions in [AGENTS.md](../../AGENTS.md).

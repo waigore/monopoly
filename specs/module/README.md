@@ -10,4 +10,4 @@ last_edited: 2026-10-07
 
 Document modular boundaries: what each module owns, its contracts, and how modules integrate.
 
-Name modules for the game concept they represent. Keep rules logic out of UI modules; link [game](../game/) and [ui](../ui/) specs. Follow spec conventions in [AGENTS.md](../../AGENTS.md).
+Name modules for the game concept they represent. Keep rules logic out of UI modules; link [game](../game/) and [ui](../ui/) specs. Follow the Markdown conventions in [AGENTS.md](../../AGENTS.md).

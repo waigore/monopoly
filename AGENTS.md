@@ -6,7 +6,7 @@ Instructions for coding agents working in this repository. Human contributors sh
 
 `monopoly` is a simple cross-platform clone of the property-trading board game. It is licensed under the Apache License 2.0 (`LICENSE`).
 
-The tree currently holds the license, contributor docs, and `specs/`. Leave this file accurate.
+The tree currently holds the license, contributor docs, `docs/`, and `specs/`. Leave this file accurate.
 
 ## Layout
 
@@ -14,7 +14,8 @@ The tree currently holds the license, contributor docs, and `specs/`. Leave this
 LICENSE                 Apache License 2.0
 AGENTS.md               Instructions for coding agents
 CONTRIBUTING.md         Instructions for human contributors
-docs/workflow/          Processes for landing changes
+docs/                   Process and contributor Markdown
+  workflow/             How changes land on main
 specs/                  Design and contract Markdown
   game/                 Game design
   ui/                   UI and UX
@@ -23,17 +24,25 @@ specs/                  Design and contract Markdown
   test/                 Testing tools and instructions
 ```
 
-Put new source in a directory the project already uses. If none exists, ask where it should live before creating a tree of folders. Put new specs under `specs/` in the folder that matches the subject.
+Put new source in a directory the project already uses. If none exists, ask where it should live before creating a tree of folders. Put new specs under `specs/` and new process docs under `docs/` in the folder that matches the subject.
 
-## Specs
+## Markdown
 
-Read [specs/README.md](specs/README.md) for the index. Write specs as Markdown. Follow these conventions:
+Write Markdown under `specs/` and `docs/`. Follow these conventions:
 
 - Keep each file under 500 lines. Split into linked sub-documents when a file would grow past that.
-- Link other specs instead of copying the same content.
+- Link other docs instead of copying the same content.
 - Start each file with YAML frontmatter: `title`, `tags` (for search), and `last_edited` (ISO date `YYYY-MM-DD`). Update `last_edited` when you change the file.
 - Put a **Quick start** section immediately after the heading so a reader can act without scanning the whole document.
 - Do not include a changelog. Git history is the record of edits.
+
+## Specs
+
+Read [specs/README.md](specs/README.md) for the index. Follow the [Markdown](#markdown) conventions above.
+
+## Docs
+
+Read [docs/README.md](docs/README.md) for the index. Follow the [Markdown](#markdown) conventions above.
 
 ## Game
 
