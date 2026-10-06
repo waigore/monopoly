@@ -9,4 +9,4 @@
 
 Pushes straight to `main`, including force-pushes, are rejected. A review is not required. A commit that GitHub cannot attribute to an account needs one approving review.
 
-Auto-merge is enabled automatically by the `enable-automerge` workflow on non-draft pull requests into `main`. Enable it manually only if that job has not run yet and `trigger-automerge` is still pending. The pull request merges when that check passes and the branch is up to date.
+Auto-merge is enabled automatically by the `enable-automerge` workflow on non-draft pull requests into `main`. That job polls until GitHub reports the pull request as mergeable, then enables squash auto-merge. Enable it manually only if that job has not run yet and `trigger-automerge` is still pending. The pull request merges when that check passes and the branch is up to date.
