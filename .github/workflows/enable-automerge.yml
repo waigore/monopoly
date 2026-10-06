@@ -1,12 +1,15 @@
-# Enable squash auto-merge on every non-draft PR into main.
-# Uses pull_request_target so fork PRs get a writeable token; this job
-# never checks out PR code.
+# Squash-merge into main after the required trigger-automerge check passes.
+# Runs from main via workflow_run so it never checks out PR code.
+#
+# Auto-merge cannot be armed from this workflow: the job itself is a
+# non-required check, which makes the PR UNSTABLE, and GitHub rejects
+# enablePullRequestAutoMerge in that state.
 name: enable-automerge
 
 on:
-  pull_request_target:
-    types: [opened, reopened, synchronize, ready_for_review]
-    branches: [main]
+  workflow_run:
+    workflows: [trigger-automerge]
+    types: [completed]
 
 permissions:
   contents: write
@@ -15,34 +18,26 @@ permissions:
 jobs:
   enable-automerge:
     name: enable-automerge
-    if: github.event.pull_request.draft == false
+    if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
-      - name: Enable auto-merge
+      - name: Squash-merge
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_URL: ${{ github.event.pull_request.html_url }}
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          PR_NUMBER: ${{ github.event.workflow_run.pull_requests[0].number }}
         run: |
-          # GitHub computes mergeability in the background. Asking too soon
-          # returns UNKNOWN/UNSTABLE and enablePullRequestAutoMerge fails.
-          for i in $(seq 1 24); do
-            mergeable=$(gh pr view "$PR_URL" --json mergeable --jq .mergeable)
-            status=$(gh pr view "$PR_URL" --json mergeStateStatus --jq .mergeStateStatus)
-            echo "attempt=$i mergeable=$mergeable mergeStateStatus=$status"
-            case "$mergeable" in
-              CONFLICTING)
-                echo "PR has merge conflicts"
-                exit 1
-                ;;
-              UNKNOWN)
-                sleep 5
-                continue
-                ;;
-            esac
-            if gh pr merge --auto --squash "$PR_URL"; then
-              exit 0
-            fi
-            sleep 5
-          done
-          echo "Timed out waiting for the PR to become mergeable"
-          exit 1
+          if [ -z "$PR_NUMBER" ]; then
+            PR_NUMBER=$(gh pr list --repo "$GITHUB_REPOSITORY" --state open --base main \
+              --json number,headRefOid --jq ".[] | select(.headRefOid==\"$HEAD_SHA\") | .number")
+          fi
+          if [ -z "$PR_NUMBER" ]; then
+            echo "No open PR into main for $HEAD_SHA"
+            exit 0
+          fi
+
+          meta=$(gh pr view "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --json isDraft,baseRefName,state)
+          echo "$meta"
+          echo "$meta" | jq -e '.state=="OPEN" and .isDraft==false and .baseRefName=="main"' >/dev/null
+
+          gh pr merge "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --squash

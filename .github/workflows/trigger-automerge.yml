@@ -1,9 +1,10 @@
-# Always-passing check. Main requires it so a pull request can enable
-# auto-merge while this job is still pending.
+# Always-passing required check. Main requires it so a pull request can
+# merge once this job succeeds.
 name: trigger-automerge
 
 on:
   pull_request:
+    types: [opened, reopened, synchronize, ready_for_review]
 
 permissions: {}
 
