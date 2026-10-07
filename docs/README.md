@@ -12,4 +12,5 @@ Write process and contributor notes as Markdown under this tree. Follow the Mark
 
 | Folder | Use for |
 | --- | --- |
+| [agents/](agents/) | Coding agent setup, shared skills |
 | [workflow/](workflow/) | How changes land on `main`, CI merge gates |
