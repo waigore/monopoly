@@ -6,7 +6,7 @@ Instructions for coding agents working in this repository. Human contributors sh
 
 `monopoly` is a simple cross-platform clone of the property-trading board game. It is licensed under the Apache License 2.0 (`LICENSE`).
 
-The tree currently holds the license, contributor docs, `docs/`, and `specs/`. Leave this file accurate.
+The tree currently holds the license, contributor docs, `docs/`, `specs/`, and the shared agent skills directory. Leave this file accurate.
 
 ## Layout
 
@@ -14,7 +14,10 @@ The tree currently holds the license, contributor docs, `docs/`, and `specs/`. L
 LICENSE                 Apache License 2.0
 AGENTS.md               Instructions for coding agents
 CONTRIBUTING.md         Instructions for human contributors
+.agents/skills/         Agent skill definitions (single source)
+.grok/skills            Symlink to .agents/skills for Grok
 docs/                   Process and contributor Markdown
+  agents/               Coding agent setup and skills
   workflow/             How changes land on main
 specs/                  Design and contract Markdown
   game/                 Game design
@@ -43,6 +46,10 @@ Read [specs/README.md](specs/README.md) for the index. Follow the [Markdown](#ma
 ## Docs
 
 Read [docs/README.md](docs/README.md) for the index. Follow the [Markdown](#markdown) conventions above.
+
+## Skills
+
+Define every skill in `.agents/skills/<skill-name>/SKILL.md`, the vendor-neutral source. Vendor directories (`.cursor/`, `.grok/`, `.opencode/`) only refer to that tree. Never put a skill definition or a copy in them. Read [docs/agents/skills.md](docs/agents/skills.md) for how each agent finds the skills.
 
 ## Game
 
